@@ -14,7 +14,8 @@ const schema=mongoose.Schema({
     isBlockedByAdmin: { type: Boolean, default: false },
     interest:[{type:String}],
     registerOn:{type:Number,default:(new Date()).getTime()},
-    isAdmin:{type:Boolean,default:false}
+    isAdmin:{type:Boolean,default:false},
+    joinCommunity:{type:String,default:null}
 })
 
 const USER=mongoose.model("USER",schema)

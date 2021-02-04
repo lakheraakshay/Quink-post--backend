@@ -71,9 +71,11 @@ router.delete("/:userId", async (req, res) => {
 router.post("/save/:userId/post/:postId", async (req, res) => {
   try {
     const user = await USER.findByIdAndUpdate(req.params.userId, { $push: { savedPost: req.params.postId } })
-    res.status(200).send({ success: true, msg: "done",savePost:user.savedPost })
-  } catch (e) { console.log("error while saving post by user--->>>>".red, e) 
-res.status({success:false,e})}
+    res.status(200).send({ success: true, msg: "done", savePost: user.savedPost })
+  } catch (e) {
+    console.log("error while saving post by user--->>>>".red, e)
+    res.status({ success: false, e })
+  }
 })
 
 
@@ -81,8 +83,8 @@ router.patch("/update", async (req, res) => {
   //  req.body.userId
   // req.body all
   try {
-      const user=await USER.findByIdAndUpdate(req.body.userId,req.body,{new:true})
-      res.status(200).send({success:true,user})
+    const user = await USER.findByIdAndUpdate(req.body.userId, req.body, { new: true })
+    res.status(200).send({ success: true, user })
   } catch (error) {
     console.log("error while updating user---->", error)
     res.status(404).send({ success: false, error })
@@ -91,4 +93,19 @@ router.patch("/update", async (req, res) => {
 
 })
 
+router.patch("/joinCommunity", async (req, res) => {
+  try {
+        const user= await USER.findByIdAndUpdate(req.body.userId,{joinCommunity:req.body.joinCommunity},{new:true})
+        res.status(200).send({success:true,user:user})
+      
+  } catch (e){
+      console.log("error while joining community......".red,e)
+  }
+})
+router.patch("/leftCommunity",async (req,res)=>{
+  try{
+    const user =await USER.findByIdAndUpdate(req.body.userId,{joinCommunity:null},{new:true})
+    res.status(200).send({ success:true,user:user })
+  }catch(e){console.log("error ".red,e)}
+})
 module.exports = router
