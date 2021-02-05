@@ -69,7 +69,7 @@ app.use(express.json())
 
 app.use("/user", require("./Routes/User"))
 app.use("/follow", require("./Routes/Follow"))
-app.use("/post", require("./Routes/Post"))
+app.use("/post", require("./Routes/SPost"))
 app.use("/comment", require("./Routes/Comment"))
 app.use("/like", require("./Routes/Like"))
 app.use("/save", require("./Routes/Save"))
@@ -77,7 +77,7 @@ app.use("/reply", require("./Routes/Reply"))
 app.use("/challenge", require("./Routes/Challenge"))
 app.use("/community", require("./Routes/Community"))
 app.use("/feed", require("./Routes/Feed"))
-app.use("/admin", require("./Routes/admin"))
+app.use("/admin", require("./Routes/Admin"))
 
 
 // ---------------------------------------SERVER-------------
