@@ -1,5 +1,5 @@
 const express = require('express');
-const POST = require('../Schema/POST');
+const POST = require('../Schema/Post');
 const router=express.Router()
 
 

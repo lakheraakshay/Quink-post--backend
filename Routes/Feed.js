@@ -1,7 +1,7 @@
 const express = require('express');
 const USER = require('../Schema/USER');
 const router = express.Router()
-const POST = require("../Schema/POST")
+const POST = require("../Schema/Post")
 
 // --get feed for user accordint to his interest
 
