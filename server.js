@@ -69,7 +69,7 @@ app.use(express.json())
 
 app.use("/user", require("./Routes/User"))
 app.use("/follow", require("./Routes/Follow"))
-app.use("/post", require("./Routes/SPost"))
+app.use("/post", require("./Routes/Post"))
 app.use("/comment", require("./Routes/Comment"))
 app.use("/like", require("./Routes/Like"))
 app.use("/save", require("./Routes/Save"))
