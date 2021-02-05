@@ -1,7 +1,7 @@
 const express = require('express');
 const COMMUNITYCHAT = require('../Schema/Chat');
 const COMMUNITY = require('../Schema/Community');
-const POST = require('../Schema/Post');
+const POST = require('../Schema/SPost');
 const USER = require('../Schema/USER');
 const router = express.Router()
 

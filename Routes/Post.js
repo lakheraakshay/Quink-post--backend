@@ -1,6 +1,6 @@
 const { red } = require('colors');
 const express = require('express');
-const POST =require("../Schema/Post")
+const POST =require("../Schema/SPost")
 const USER = require('../Schema/USER');
 const router = express.Router()
 router.post("/upload", async (req, res) => {

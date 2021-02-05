@@ -1,6 +1,6 @@
 const express = require('express');
 const CHALLENGE = require('../Schema/Challenge');
-const POST = require('../Schema/Post');
+const POST = require('../Schema/SPost');
 const USER = require('../Schema/USER');
 const router=express.Router()
 

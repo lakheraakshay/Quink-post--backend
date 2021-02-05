@@ -1,6 +1,6 @@
 const express = require('express');
 const COMMENT = require('../Schema/COMMENT.js');
-const POST = require("../Schema/Post")
+const POST = require("../Schema/SPost")
 const router = express.Router()
 
 router.post("/", async (req, res) => {
