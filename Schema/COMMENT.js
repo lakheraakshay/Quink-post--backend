@@ -6,7 +6,6 @@ const schema=mongoose.Schema({
     post:{type:mongoose.Schema.Types.ObjectId,ref:"POST"},
     likedBy:[{type:mongoose.Schema.Types.ObjectId,ref:"USER"}],
     reply:[{type:mongoose.Schema.Types.ObjectId,ref:"REPLY"}]
-
 })
 
 const COMMENT=mongoose.model("COMMENT",schema)

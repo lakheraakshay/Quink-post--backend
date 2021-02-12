@@ -34,7 +34,7 @@ router.get("/ofUser/:userId",async(req,res)=>{
 router.get("/all",async(req,res)=>{
    try{
    
-    const posts=await POST.find().populate({path:"likedBy",select:"userName"})
+    const posts=await POST.find().populate({path:"likedBy",select:"userName"}).populate({path:"author",select:"userName"})
     res.status(200).send({success:true,posts})
    
 }catch(e){console.log("error while fetching all posts-->>>",red,e)}

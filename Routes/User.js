@@ -19,7 +19,7 @@ router.post("/signUp", hashedPassword, async (req, res) => {
     const user = { ...req.body, password: req.hashedPassword }
     const setInModel = new USER(user)
     setInModel.save().then((resultUser) => {
-      res.status(201).send(resultUser)
+      res.status(201).send({ success: true, resultUser, msg: "successfully signed up" })
     }).catch((err) => {
       var msg1 = ""
 
@@ -34,6 +34,9 @@ router.post("/signUp", hashedPassword, async (req, res) => {
   }
 
 })
+
+
+
 
 
 router.post("/login", checkEmailOrUserName, async (req, res) => {
@@ -95,17 +98,17 @@ router.patch("/update", async (req, res) => {
 
 router.patch("/joinCommunity", async (req, res) => {
   try {
-        const user= await USER.findByIdAndUpdate(req.body.userId,{joinCommunity:req.body.joinCommunity},{new:true})
-        res.status(200).send({success:true,user:user})
-      
-  } catch (e){
-      console.log("error while joining community......".red,e)
+    const user = await USER.findByIdAndUpdate(req.body.userId, { joinCommunity: req.body.joinCommunity }, { new: true })
+    res.status(200).send({ success: true, user: user })
+
+  } catch (e) {
+    console.log("error while joining community......".red, e)
   }
 })
-router.patch("/leftCommunity",async (req,res)=>{
-  try{
-    const user =await USER.findByIdAndUpdate(req.body.userId,{joinCommunity:null},{new:true})
-    res.status(200).send({ success:true,user:user })
-  }catch(e){console.log("error ".red,e)}
+router.patch("/leftCommunity", async (req, res) => {
+  try {
+    const user = await USER.findByIdAndUpdate(req.body.userId, { joinCommunity: null }, { new: true })
+    res.status(200).send({ success: true, user: user })
+  } catch (e) { console.log("error ".red, e) }
 })
 module.exports = router

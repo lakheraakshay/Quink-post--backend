@@ -81,4 +81,4 @@ app.use("/admin", require("./Routes/Admin"))
 
 
 // ---------------------------------------SERVER-------------
-app.listen(process.env.PORT || 5000||5000, () => console.log("server is running at".yellow, PORT))
+app.listen(process.env.PORT || 5000, () => console.log("server is running at".yellow, PORT))

@@ -23,7 +23,19 @@ router.post("/post", async (req, res) => {
     const community = await COMMUNITY.findByIdAndUpdate(req.body.communityId, { $push: { post: post._id } }, { new: true })
     res.status(200).send({ success: true, community })
 })
-
+router.get("/", async (req, res) => {
+    try {
+        const community=await COMMUNITY.find()
+        res.status(200).send(community)
+    }
+    catch (e) { console.log("error while loading all community".red, e) }
+})
+router.get("/allPost/:communityId", async (req, res) => {
+    try {
+        const community = await COMMUNITY.findById(req.params.communityId).populate({path:"post",select:"title body createdOn image comment likedBy"})
+        res.status(200).send({ success: true, community})
+    } catch (e) { console.log("error while getting all post from community".red, e) }
+})
 
 router.post("/chat", async (req, res) => {
     const chat = await new COMMUNITYCHAT(req.body)
