@@ -40,6 +40,7 @@ router.post("/signUp", hashedPassword, async (req, res) => {
 router.get("/success",(req,res)=>{
   res.status(200).send("success fully loged in")
 })
+
 router.get("/google",passport.authenticate("google",{scope:["email","profile"]}))
 
 router.get("/google/callback",passport.authenticate("google",{failureRedirect:"/failed"}),(req,res)=>{
@@ -53,13 +54,11 @@ router.post("/login", checkEmailOrUserName, async (req, res) => {
       res.status(200).send({ success: true, user: req.user, token: req.token })
     }
   } catch (e) { console.log("error while login in router user>>>>>>>".red, err) }
-
-
 })
 router.get("/:userId", async (req, res) => {
   try {
     console.log("user is >>>>>".green)
-    const user = await USER.findById(req.params.userId).populate({ path: "followings", select: "userName" })
+    const user = await USER.findById(req.params.userId).populate({ path: "followings", select: "userName" }).populate({path:"post"})
     res.status(200).send({ success: true, user })
   } catch (e) {
     console.log("error while getting user with userId".red, e)
