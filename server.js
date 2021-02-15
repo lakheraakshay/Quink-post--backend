@@ -1,15 +1,35 @@
 const express = require('express');
+const passport = require('passport');
 const app = express()
 const dotenv = require("dotenv").config()
 const PORT = dotenv.parsed.PORT
-const Pusher = require("pusher")
-
+require("./Middlewear/Passport-setup")
 require("./Schema/MongooseConnection")
+// const Pusher = require("pusher")
 
 
 app.use(express.json())
 
+// ---------------------------------------ROUTES-----------
+// app.get("/google/callback",passport.authenticate("google",{failureRedirect:"/failed"}),(req,res)=>{
+//       res.redirect("/success")}
+//       )
+app.use("/user", require("./Routes/User"))
+app.use("/follow", require("./Routes/Follow"))
+app.use("/post", require("./Routes/Post"))
+app.use("/comment", require("./Routes/Comment"))
+app.use("/like", require("./Routes/Like"))
+app.use("/save", require("./Routes/Save"))
+app.use("/reply", require("./Routes/Reply"))
+app.use("/challenge", require("./Routes/Challenge"))
+app.use("/community", require("./Routes/Community"))
+app.use("/feed", require("./Routes/Feed"))
+app.use("/admin", require("./Routes/Admin"))
 
+
+
+// ---------------------------------------SERVER-------------
+app.listen(process.env.PORT || 5000, () => console.log("server is running at".yellow, PORT))
 
 // ---------------------------------------PUSHER------------
 // frontend
@@ -65,20 +85,4 @@ app.use(express.json())
 
 
 
-// ---------------------------------------ROUTES-----------
 
-app.use("/user", require("./Routes/User"))
-app.use("/follow", require("./Routes/Follow"))
-app.use("/post", require("./Routes/Post"))
-app.use("/comment", require("./Routes/Comment"))
-app.use("/like", require("./Routes/Like"))
-app.use("/save", require("./Routes/Save"))
-app.use("/reply", require("./Routes/Reply"))
-app.use("/challenge", require("./Routes/Challenge"))
-app.use("/community", require("./Routes/Community"))
-app.use("/feed", require("./Routes/Feed"))
-app.use("/admin", require("./Routes/Admin"))
-
-
-// ---------------------------------------SERVER-------------
-app.listen(process.env.PORT || 5000, () => console.log("server is running at".yellow, PORT))

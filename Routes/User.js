@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router()
-const bcrypt = require("bcryptjs")
 const USER = require('../Schema/USER');
-
+require("dotenv").config()
 const midUser = require("../Middlewear/User");
+const passport = require('passport');
 const hashedPassword = midUser.hashedPassword
 const checkEmailOrUserName = midUser.checkEmailOrUserName
+require("../Middlewear/Passport-setup")
 
-
+router.use(passport.initialize())
+router.use(passport.session())
 router.get("/all", async (req, res) => {
   const users = await USER.find()
   res.status(200).send({ success: true, users })
@@ -35,10 +37,15 @@ router.post("/signUp", hashedPassword, async (req, res) => {
 
 })
 
+router.get("/success",(req,res)=>{
+  res.status(200).send("success fully loged in")
+})
+router.get("/google",passport.authenticate("google",{scope:["email","profile"]}))
 
+router.get("/google/callback",passport.authenticate("google",{failureRedirect:"/failed"}),(req,res)=>{
+  res.redirect("/user/success")
 
-
-
+})
 router.post("/login", checkEmailOrUserName, async (req, res) => {
   try {
     console.log("yes you are here")
