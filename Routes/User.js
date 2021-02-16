@@ -89,8 +89,7 @@ router.post("/save/:userId/post/:postId", async (req, res) => {
 
 
 router.patch("/update", async (req, res) => {
-  //  req.body.userId
-  // req.body all
+
   try {
     const user = await USER.findByIdAndUpdate(req.body.userId, req.body, { new: true })
     res.status(200).send({ success: true, user })
@@ -98,8 +97,6 @@ router.patch("/update", async (req, res) => {
     console.log("error while updating user---->", error)
     res.status(404).send({ success: false, error })
   }
-
-
 })
 
 router.patch("/joinCommunity", async (req, res) => {
